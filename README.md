@@ -1,4 +1,4 @@
 # ML
 Machine Learning
 
-This repository consists of an R Markdown PDF file that shows my approach to the Kaggle Playground - Season 3, Episode 14 competition, in which I used a LightGBM model to predict blueberry yield based on 11 numeric variables.  The file is 11 pages long.
+This repo contains a couple of different approaches that I used for a Kaggle competition - one where I used LightGBM and one where I used robust regression.
