@@ -1,0 +1,35 @@
+name: Convert Notebooks to Markdown
+
+on:
+  push:
+    paths:
+      - "*.ipynb"
+  workflow_dispatch:
+
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write  # permet push automàtic dels .md
+
+    steps:
+      # 1️⃣ Fer checkout del repositori
+      - uses: actions/checkout@v3
+
+      # 2️⃣ Instal·lar nbconvert (només si no està disponible)
+      - name: Install nbconvert
+        run: |
+          python3 -m pip install --upgrade pip
+          pip3 install jupyter
+
+      # 3️⃣ Convertir tots els notebooks a Markdown
+      - name: Convert notebooks
+        run: jupyter nbconvert --to markdown *.ipynb
+
+      # 4️⃣ Commit i push automàtic dels fitxers Markdown
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Convert notebooks to Markdown"
+          file_pattern: "*.md"
+          commit_user_name: "github-actions[bot]"
+          commit_user_email: "41898282+github-actions[bot]@users.noreply.github.com"
